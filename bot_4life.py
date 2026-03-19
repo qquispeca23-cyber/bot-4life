@@ -59,11 +59,16 @@ def bot():
         )
 
     # COMPRARelif '4' in incoming_msg or 'comprar' in incoming_msg:
-        msg.body(
-            "🛒 COMPRA AHORA 🔥\n\n"
-            "Envíame tus datos así:\n\n"
-            "Nombre - Ciudad - Producto"
-        )
+    msg.body(
+        "🛒 *COMPRA AHORA* 🔥\n\n"
+        "Para procesar tu pedido envíame:\n\n"
+        "👤 Nombre:\n"
+        "📍 Ciudad:\n"
+        "📦 Producto:\n\n"
+        "Ejemplo:\n"
+        "Juan - Lima - Transfer Factor\n\n"
+        "💬 Escríbelo así para atenderte rápido"
+    )
 
     # GUARDAR CLIENTES
     elif '-' in incoming_msg:

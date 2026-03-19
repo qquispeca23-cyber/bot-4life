@@ -58,8 +58,7 @@ def bot():
             "👉 Escribe 4 para comprar"
         )
 
-    # COMPRAR
-    elif incoming_msg == '4' or 'comprar' in incoming_msg:
+    # COMPRARelif '4' in incoming_msg or 'comprar' in incoming_msg:
         msg.body(
             "🛒 COMPRA AHORA 🔥\n\n"
             "Envíame tus datos así:\n\n"

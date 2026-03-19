@@ -4,6 +4,7 @@ from twilio.twiml.messaging_response import MessagingResponse
 app = Flask(__name__)
 
 @app.route("/whatsapp", methods=["POST"])
+
 def bot():
     incoming_msg = request.values.get('Body', '').lower()
     numero = request.values.get('From', '')
@@ -25,77 +26,90 @@ def bot():
             "4️⃣ Comprar"
         )
 
-    # OPCIÓN SALUD
-    elif incoming_msg == '1' or 'salud' in incoming_msg:
+    # SALUD (VENTA EMOCIONAL)
+    elif '1' in incoming_msg or 'salud' in incoming_msg:
         msg.body(
-            "💊 SALUD 4LIFE\n\n"
-            "🔥 Transfer Factor fortalece tu sistema inmune\n"
-            "⚡ Más energía diaria\n"
-            "🛡️ Mayor protección\n\n"
-            "👉 Escribe 3 para ver precios\n"
-            "👉 Escribe 4 para comprar"
+            "💚 *SALUD 4LIFE*\n\n"
+            "Nuestro producto estrella *Transfer Factor*:\n\n"
+            "✅ Refuerza tu sistema inmune\n"
+            "✅ Más energía diaria\n"
+            "✅ Protección total\n\n"
+            "🔥 RESULTADOS REALES desde la primera semana\n\n"
+            "👉 Escribe *precio* para continuar"
         )
 
-    # OPCIÓN NEGOCIO
-    elif incoming_msg == '2' or 'negocio' in incoming_msg:
+    # NEGOCIO (MENTALIDAD DINERO)
+    elif '2' in incoming_msg or 'negocio' in incoming_msg:
         msg.body(
-            "💰 NEGOCIO 4LIFE\n\n"
-            "🚀 Gana dinero desde casa\n"
-            "📈 Sin experiencia\n"
-            "🌎 Negocio internacional\n\n"
-            "👉 ¿Quieres empezar?\n"
-            "Escribe: empezar"
+            "💰 *NEGOCIO 4LIFE*\n\n"
+            "Genera ingresos desde casa:\n\n"
+            "📈 Sistema probado\n"
+            "🌍 Negocio internacional\n"
+            "📲 Solo con tu celular\n\n"
+            "🔥 Personas ya están ganando dinero\n\n"
+            "👉 ¿Quieres empezar? Escribe *empezar*"
         )
 
-    # PRECIOS
-    elif incoming_msg == '3' or 'precio' in incoming_msg:
+    # PRECIOS (CIERRE)
+    elif '3' in incoming_msg or 'precio' in incoming_msg:
         msg.body(
-            "💵 PRECIOS\n\n"
-            "🔹 Transfer Factor: Consultar\n"
-            "🔹 Colágeno: Consultar\n"
-            "🔹 Energía: Consultar\n\n"
-            "🔥 Promoción disponible hoy\n\n"
-            "👉 Escribe 4 para comprar"
+            "💲 *PRECIOS*\n\n"
+            "🔥 Transfer Factor desde:\n"
+            "👉 S/ XXX (coloca tu precio real)\n\n"
+            "🎁 Promoción disponible HOY\n\n"
+            "⚠️ Stock limitado\n\n"
+            "👉 Escribe *comprar* para pedir ahora"
         )
 
-    # COMPRARelif '4' in incoming_msg or 'comprar' in incoming_msg:
-    msg.body(
-        "🛒 *COMPRA AHORA* 🔥\n\n"
-        "Para procesar tu pedido envíame:\n\n"
-        "👤 Nombre:\n"
-        "📍 Ciudad:\n"
-        "📦 Producto:\n\n"
-        "Ejemplo:\n"
-        "Juan - Lima - Transfer Factor\n\n"
-        "💬 Escríbelo así para atenderte rápido"
-    )
+    # COMPRA (CIERRE FINAL)
+    elif '4' in incoming_msg or 'comprar' in incoming_msg:
+        msg.body(
+            "🛒 *COMPRA AHORA* 🔥\n\n"
+            "Para procesar tu pedido envíame:\n\n"
+            "👤 Nombre:\n"
+            "📍 Ciudad:\n"
+            "📦 Producto:\n\n"
+            "Ejemplo:\n"
+            "Juan - Lima - Transfer Factor\n\n"
+            "💬 Te atenderé de inmediato"
+        )
 
-    # GUARDAR CLIENTES
+    # DETECTAR PEDIDO AUTOMÁTICO
     elif '-' in incoming_msg:
         with open("clientes.txt", "a") as f:
             f.write(f"{numero} - {incoming_msg}\n")
 
         msg.body(
-            "✅ Pedido recibido 🔥\n\n"
-            "📞 Te contactaremos pronto\n"
-            "🚀 Gracias por confiar en 4Life"
+            "✅ *PEDIDO RECIBIDO* 🔥\n\n"
+            "📲 Te contactaremos en breve\n"
+            "🚚 Envíos a todo el país\n\n"
+            "🙏 Gracias por confiar en 4Life"
         )
 
-    # RESPUESTA POR DEFECTO
+    # FOLLOW-UP AUTOMÁTICO
+    elif 'empezar' in incoming_msg:
+        msg.body(
+            "🚀 *EMPEZAR ES FÁCIL*\n\n"
+            "Te guiaré paso a paso:\n\n"
+            "1️⃣ Registro\n"
+            "2️⃣ Activación\n"
+            "3️⃣ Ventas\n\n"
+            "💰 Puedes ganar desde el primer mes\n\n"
+            "👉 ¿Quieres asesoría directa? Escribe *asesor*"
+        )
+
+    elif 'asesor' in incoming_msg:
+        msg.body(
+            "👨‍💼 Perfecto, un asesor te escribirá ahora mismo 📲\n\n"
+            "🔥 Prepárate para comenzar tu negocio"
+        )
+
+    # RESPUESTA INTELIGENTE
     else:
         msg.body(
             "🤖 No entendí tu mensaje\n\n"
-            "👉 Escribe 'hola' para ver el menú"
+            "👉 Escribe *hola* para ver el menú"
         )
 
     return str(resp)
-import os
-
-@app.route("/")
-def home():
-    return "BOT ACTIVO 4LIFE 🚀"
-
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 10000))
-    app.run(host="0.0.0.0", port=port)
 

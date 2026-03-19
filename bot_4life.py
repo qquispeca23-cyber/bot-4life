@@ -26,6 +26,6 @@ def bot():
         msg.body("🛒 Perfecto 🔥\nEnvíame:\n👉 Nombre\n👉 Ciudad\n👉 Producto")
 
     else:
-        msg.body("🤖 Escribe: hola, salud, negocio o comprar")
+    msg.body("🤖 Escribe: hola, salud, negocio o comprar")
 
-    return str(resp)
+return str(resp)

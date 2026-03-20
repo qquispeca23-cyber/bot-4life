@@ -1,8 +1,13 @@
 from flask import Flask, request
 from twilio.twiml.messaging_response import MessagingResponse
 import os
+from datetime import datetime
 
 app = Flask(__name__)
+
+def guardar_cliente(numero, mensaje):
+    with open("clientes.txt", "a", encoding="utf-8") as f:
+        f.write(f"{datetime.now()} | {numero} | {mensaje}\n")
 
 @app.route("/whatsapp", methods=["POST"])
 def bot():
@@ -15,7 +20,7 @@ def bot():
     # MENÚ PRINCIPAL
     if incoming_msg in ['hola', 'menu', 'inicio']:
         msg.body(
-            "🔥 Hola! Soy tu asesor 4Life 💪\n\n"
+            "🔥 *BIENVENIDO AL SISTEMA 4LIFE* 💪\n\n"
             "💚 Mejora tu salud\n"
             "⚡ Aumenta tu energía\n"
             "💰 Genera ingresos\n\n"
@@ -30,18 +35,20 @@ def bot():
     elif incoming_msg in ['1', 'salud']:
         msg.body(
             "💚 *SALUD 4LIFE*\n\n"
-            "Nuestro producto estrella *Transfer Factor*:\n\n"
+            "Transfer Factor:\n\n"
             "✅ Refuerza tu sistema inmune\n"
             "✅ Más energía diaria\n"
-            "✅ Protección total\n\n"
+            "✅ Mejor calidad de vida\n\n"
+            "🔥 RESULTADOS REALES\n\n"
             "👉 Escribe *3* para ver precios"
         )
+        msg.media("https://i.imgur.com/8Km9tLL.jpg")  # cambia por tu imagen
 
     # NEGOCIO
     elif incoming_msg in ['2', 'negocio']:
         msg.body(
             "💰 *NEGOCIO 4LIFE*\n\n"
-            "Genera ingresos desde casa:\n\n"
+            "Gana dinero desde casa:\n\n"
             "📈 Sistema probado\n"
             "🌍 Negocio internacional\n"
             "📲 Solo con tu celular\n\n"
@@ -51,10 +58,10 @@ def bot():
     # PRECIOS
     elif incoming_msg in ['3', 'precio', 'precios']:
         msg.body(
-            "💲 *PRECIOS*\n\n"
-            "🔥 Transfer Factor desde:\n"
-            "👉 S/ 290 \n\n"
-            "🎁 Promoción disponible HOY\n\n"
+            "💲 *PROMOCIÓN HOY* 🔥\n\n"
+            "Transfer Factor desde:\n"
+            "👉 S/ 150\n\n"
+            "🎁 Bonos incluidos HOY\n\n"
             "👉 Escribe *4* para comprar"
         )
 
@@ -69,14 +76,14 @@ def bot():
         )
 
     # GUARDAR CLIENTE
-    elif '-' in incoming_msg:
-        print(f"CLIENTE: {numero} - {incoming_msg}")
+    elif '-' in incoming_msg and len(incoming_msg.split('-')) >= 3:
+        guardar_cliente(numero, incoming_msg)
 
         msg.body(
-            "✅ *PEDIDO RECIBIDO* 🔥\n\n"
-            "📲 Te escribiremos en breve\n"
+            "✅ *PEDIDO CONFIRMADO* 🔥\n\n"
+            "📲 Un asesor te escribirá en breve\n"
             "🚚 Envíos a todo el Perú\n\n"
-            "🙏 Gracias por confiar"
+            "🙏 Gracias por confiar en 4Life"
         )
 
     # FOLLOW-UP
@@ -95,6 +102,14 @@ def bot():
             "🔥 Prepárate para crecer"
         )
 
+    elif incoming_msg == 'quiero':
+        msg.body(
+            "🔥 Excelente decisión\n\n"
+            "📲 Te escribiré personalmente para ayudarte\n"
+            "💰 Hoy puedes empezar\n\n"
+            "👉 Mantente atento"
+        )
+
     # DEFAULT
     else:
         msg.body(
@@ -104,11 +119,9 @@ def bot():
 
     return str(resp)
 
-
 @app.route("/")
 def home():
     return "BOT ACTIVO 4LIFE 🚀"
-
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))

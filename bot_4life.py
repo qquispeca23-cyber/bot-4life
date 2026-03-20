@@ -27,31 +27,29 @@ def bot():
         )
 
     # SALUD
-    elif incoming_msg == '1' or 'salud' in incoming_msg:
+    elif incoming_msg in ['1', 'salud']:
         msg.body(
             "💚 *SALUD 4LIFE*\n\n"
             "Nuestro producto estrella *Transfer Factor*:\n\n"
             "✅ Refuerza tu sistema inmune\n"
             "✅ Más energía diaria\n"
             "✅ Protección total\n\n"
-            "🔥 RESULTADOS REALES\n\n"
             "👉 Escribe *3* para ver precios"
         )
 
     # NEGOCIO
-    elif incoming_msg == '2' or 'negocio' in incoming_msg:
+    elif incoming_msg in ['2', 'negocio']:
         msg.body(
             "💰 *NEGOCIO 4LIFE*\n\n"
             "Genera ingresos desde casa:\n\n"
             "📈 Sistema probado\n"
             "🌍 Negocio internacional\n"
             "📲 Solo con tu celular\n\n"
-            "🔥 Personas ya están ganando dinero\n\n"
             "👉 Escribe *empezar*"
         )
 
     # PRECIOS
-    elif incoming_msg == '3' or 'precio' in incoming_msg:
+    elif incoming_msg in ['3', 'precio', 'precios']:
         msg.body(
             "💲 *PRECIOS*\n\n"
             "🔥 Transfer Factor desde:\n"
@@ -61,7 +59,7 @@ def bot():
         )
 
     # COMPRA
-    elif incoming_msg == '4' or 'comprar' in incoming_msg:
+    elif incoming_msg in ['4', 'comprar']:
         msg.body(
             "🛒 *COMPRA AHORA* 🔥\n\n"
             "Envíame:\n\n"
@@ -82,17 +80,16 @@ def bot():
         )
 
     # FOLLOW-UP
-    elif 'empezar' in incoming_msg:
+    elif incoming_msg == 'empezar':
         msg.body(
             "🚀 *EMPEZAR ES FÁCIL*\n\n"
             "1️⃣ Registro\n"
             "2️⃣ Activación\n"
             "3️⃣ Ganancias\n\n"
-            "💰 Puedes iniciar hoy mismo\n\n"
             "👉 Escribe *asesor*"
         )
 
-    elif 'asesor' in incoming_msg:
+    elif incoming_msg == 'asesor':
         msg.body(
             "👨‍💼 Un asesor te contactará ahora 📲\n\n"
             "🔥 Prepárate para crecer"

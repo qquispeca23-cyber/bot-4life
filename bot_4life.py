@@ -53,7 +53,7 @@ def bot():
         msg.body(
             "💲 *PRECIOS*\n\n"
             "🔥 Transfer Factor desde:\n"
-            "👉 S/ 150 (ejemplo)\n\n"
+            "👉 S/ 290 \n\n"
             "🎁 Promoción disponible HOY\n\n"
             "👉 Escribe *4* para comprar"
         )
